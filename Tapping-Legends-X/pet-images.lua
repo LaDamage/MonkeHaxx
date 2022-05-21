@@ -16,6 +16,7 @@ return {
     ["Starlight Orbital"] = "https://cdn.discordapp.com/attachments/975685218411372585/975696248491372574/Starlight_Orbital.png",
     
     --// Heaven Egg
+    ["Celestial Lion"] = "https://cdn.discordapp.com/attachments/975685218411372585/977655526521438228/Celestial_Lion.png",
     ["Divine Bull"] = "https://cdn.discordapp.com/attachments/975685218411372585/977617963005931621/Divine_Bull.png",
     ["Opranhim Trio"] = "https://cdn.discordapp.com/attachments/975685218411372585/977618016818827274/Opranhim_Trio.png",
 
