@@ -22,5 +22,6 @@ return {
     "10kplayersthankyou",
     "30kcoolcode",
     "10m",
-    "30kcoolcode"
+    "30kcoolcode",
+    "heaven"
 }
