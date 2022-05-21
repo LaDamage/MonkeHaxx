@@ -14,6 +14,10 @@ return {
     --// Galaxy Egg
     ["Galactical Secrets"] = "https://cdn.discordapp.com/attachments/975685218411372585/975696210683895848/Galactical_Secrets.png",
     ["Starlight Orbital"] = "https://cdn.discordapp.com/attachments/975685218411372585/975696248491372574/Starlight_Orbital.png",
+    
+    --// Heaven Egg
+    ["Divine Bull"] = "https://cdn.discordapp.com/attachments/975685218411372585/977617963005931621/Divine_Bull.png",
+    ["Opranhim Trio"] = "https://cdn.discordapp.com/attachments/975685218411372585/977618016818827274/Opranhim_Trio.png",
 
     --// 1M Egg
     ["1M Easter Trophy"] = "https://cdn.discordapp.com/attachments/975685218411372585/975698520562606100/1M_Easter_Trophy.png",
