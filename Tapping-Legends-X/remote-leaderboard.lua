@@ -395,19 +395,36 @@ function createFrame(pos, plr, amount)
     end
 end
 
-local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
-for _, v in pairs(LeaderboardList:GetChildren()) do
-	if v:IsA("Frame") then
-		local number = v.Icon.TextLabel.Text
-		local player = v.Bar.Player.Text
-		local stat = v.BarStat.Amount.Text
+function Refresh()
+    local List = instances.ScrollingFrame_1
+    for _, v in pairs(List:GetChildren()) do
+        if v:IsA("Frame") then
+            v:Destroy()
+        end
+    end
 
-		createFrame(number, player, stat)
-	end
+    local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
+    for _, v in pairs(LeaderboardList:GetChildren()) do
+        if v:IsA("Frame") then
+            local number = v.Icon.TextLabel.Text
+            local player = v.Bar.Player.Text
+            local stat = v.BarStat.Amount.Text
+
+            createFrame(number, player, stat)
+        end
+    end
+    instances.Frame_2[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
+
+    local ButtonHolder = instances.Frame_2
+    for _, v in pairs(ButtonHolder:GetChildren()) do
+        if v:IsA("ImageButton") then
+            v.UIStroke_main.Color = Color3.fromRGB(155, 155, 155)
+        end
+    end
+    ButtonHolder[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
 end
-instances.Frame_2[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
 
-function Code_LocalScript_1() --Dragify
+function Dragify()
 	local script = instances.LocalScript_1
 
 	local UserInputService = game:GetService("UserInputService")
@@ -450,148 +467,42 @@ function Code_LocalScript_1() --Dragify
 		end
 	end)
 end
-coroutine.wrap(Code_LocalScript_1)()
+coroutine.wrap(Dragify)()
 
 instances.ImageButton_1.MouseButton1Click:Connect(function()
     getgenv().selectedLB = "TotalTaps"
 
-    local List = instances.ScrollingFrame_1
-    for _, v in pairs(List:GetChildren()) do
-        if v:IsA("Frame") then
-            v:Destroy()
-        end
-    end
-
-    local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
-    for _, v in pairs(LeaderboardList:GetChildren()) do
-        if v:IsA("Frame") then
-            local number = v.Icon.TextLabel.Text
-            local player = v.Bar.Player.Text
-            local stat = v.BarStat.Amount.Text
-
-            createFrame(number, player, stat)
-        end
-    end
-
-    local ButtonHolder = instances.Frame_2
-    for _, v in pairs(ButtonHolder:GetChildren()) do
-        if v:IsA("ImageButton") then
-            v.UIStroke_main.Color = Color3.fromRGB(155, 155, 155)
-        end
-    end
-    ButtonHolder[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
+    Refresh()
 end)
 
 instances.ImageButton_2.MouseButton1Click:Connect(function()
     getgenv().selectedLB = "Rebirths"
 
-    local List = instances.ScrollingFrame_1
-    for _, v in pairs(List:GetChildren()) do
-        if v:IsA("Frame") then
-            v:Destroy()
-        end
-    end
-
-    local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
-    for _, v in pairs(LeaderboardList:GetChildren()) do
-        if v:IsA("Frame") then
-            local number = v.Icon.TextLabel.Text
-            local player = v.Bar.Player.Text
-            local stat = v.BarStat.Amount.Text
-
-            createFrame(number, player, stat)
-        end
-    end
-
-    local ButtonHolder = instances.Frame_2
-    for _, v in pairs(ButtonHolder:GetChildren()) do
-        if v:IsA("ImageButton") then
-            v.UIStroke_main.Color = Color3.fromRGB(155, 155, 155)
-        end
-    end
-    ButtonHolder[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
+    Refresh()
 end)
 
 instances.ImageButton_3.MouseButton1Click:Connect(function()
     getgenv().selectedLB = "Eggs"
 
-    local List = instances.ScrollingFrame_1
-    for _, v in pairs(List:GetChildren()) do
-        if v:IsA("Frame") then
-            v:Destroy()
-        end
-    end
-
-    local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
-    for _, v in pairs(LeaderboardList:GetChildren()) do
-        if v:IsA("Frame") then
-            local number = v.Icon.TextLabel.Text
-            local player = v.Bar.Player.Text
-            local stat = v.BarStat.Amount.Text
-
-            createFrame(number, player, stat)
-        end
-    end
-
-    local ButtonHolder = instances.Frame_2
-    for _, v in pairs(ButtonHolder:GetChildren()) do
-        if v:IsA("ImageButton") then
-            v.UIStroke_main.Color = Color3.fromRGB(155, 155, 155)
-        end
-    end
-    ButtonHolder[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
+    Refresh()
 end)
 
 instances.ImageButton_4.MouseButton1Click:Connect(function()
     getgenv().selectedLB = "PetPower"
 
-    local List = instances.ScrollingFrame_1
-    for _, v in pairs(List:GetChildren()) do
-        if v:IsA("Frame") then
-            v:Destroy()
-        end
-    end
-
-    local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
-    for _, v in pairs(LeaderboardList:GetChildren()) do
-        if v:IsA("Frame") then
-            local number = v.Icon.TextLabel.Text
-            local player = v.Bar.Player.Text
-            local stat = v.BarStat.Amount.Text
-
-            createFrame(number, player, stat)
-        end
-    end
-
-    local ButtonHolder = instances.Frame_2
-    for _, v in pairs(ButtonHolder:GetChildren()) do
-        if v:IsA("ImageButton") then
-            v.UIStroke_main.Color = Color3.fromRGB(155, 155, 155)
-        end
-    end
-    ButtonHolder[selectedLB].UIStroke_main.Color = Color3.fromRGB(255, 0, 0)
+    Refresh()
 end)
 
 instances.ImageButton_8.MouseButton1Click:Connect(function()
-    local List = instances.ScrollingFrame_1
-    for _, v in pairs(List:GetChildren()) do
-        if v:IsA("Frame") then
-            v:Destroy()
-        end
-    end
-
-    local LeaderboardList = game:GetService("Workspace").Leaderboards[selectedLB].Main.SurfaceGui.Frame.List
-    for _, v in pairs(LeaderboardList:GetChildren()) do
-        if v:IsA("Frame") then
-            local number = v.Icon.TextLabel.Text
-            local player = v.Bar.Player.Text
-            local stat = v.BarStat.Amount.Text
-
-            createFrame(number, player, stat)
-        end
-    end
+    Refresh()
 end)
 
 instances.ImageButton_9.MouseButton1Click:Connect(function()
     screenGui:Destroy()
+end)
+
+spawn(function()
+    while task.wait(10) do
+        Refresh()
+    end
 end)
