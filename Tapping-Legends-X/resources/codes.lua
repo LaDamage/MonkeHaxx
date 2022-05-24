@@ -24,5 +24,6 @@ return {
     "10m",
     "30kcoolcode",
     "heaven",
-    "fixes3"
+    "fixes3",
+    "40kreallyhotcode"
 }
