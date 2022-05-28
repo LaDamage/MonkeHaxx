@@ -26,5 +26,10 @@ return {
     --// 10M Egg
     ["10M Vexed Spirit"] = "https://cdn.discordapp.com/attachments/975685218411372585/975687426397831178/10M_Vexed_Spirit.png",
     ["10M Shattered King"] = "https://cdn.discordapp.com/attachments/975685218411372585/975687025221054524/10M_Shattered_King.png",
-    ["10M Diamond King"] = "https://cdn.discordapp.com/attachments/975685218411372585/975686987317149746/10M_Diamond_King.png"
+    ["10M Diamond King"] = "https://cdn.discordapp.com/attachments/975685218411372585/975686987317149746/10M_Diamond_King.png",
+    
+    --// 15M Egg
+    ["15M Majestic Scarlet"] = "https://cdn.discordapp.com/attachments/975685218411372585/980130797661089832/15M_Majestic_Scarlet.png",
+    ["15M Rosy Queen"] = "https://cdn.discordapp.com/attachments/975685218411372585/980130849230041209/15M_Rosy_Queen.png",
+    ["15M Ruby Masklord"] = "https://cdn.discordapp.com/attachments/975685218411372585/980130885418487818/15M_Ruby_Masklord.png"
 }
