@@ -27,4 +27,6 @@ return {
     "fixes3",
     "40kreallyhotcode",
     "15m",
+    "sussydata",
+    "missingluck",
 }
