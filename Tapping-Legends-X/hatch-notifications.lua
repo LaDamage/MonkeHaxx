@@ -1,45 +1,34 @@
---// Execution Check \\--
+--// Execution Check
 if tlx_LOADED then warn("[!] Tapping Legends X Hatch Notifications Already Loaded!") return end
 pcall(function() getgenv().tlx_LOADED = true end)
 
---// Script Libraries \\--
-getgenv().version = "3.2.5"
-getgenv().OriginalDiscord = getgenv().SecretNotification
-
-local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/Notifications/main/Notification-Library.lua", true))()
-local PetImages = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/MonkeHaxx/main/Tapping-Legends-X/pet-images.lua", true))()
-
---// Services \\--
+--// Services
 local services = setmetatable({}, { __index = function(self, key) return game:GetService(key) end })
 local client = services.Players.LocalPlayer
+
+local beginTick = tick()
 
 local request = request or http_request
 if type(syn) == 'table' and type(syn.request) == 'function' then
 	request = syn.request
 end
 
---// UI Variables \\--
-local PlayerChat = client.PlayerGui.Chat.Frame.ChatChannelParentFrame["Frame_MessageLogDisplay"].Scroller
+--// Resource Managers
+getgenv().Notificationversion = "4.0.0"
+
+local FormatManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/Functions/main/numbers.lua", true))()
+local NotificationManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/Notifications/main/Notification-Library.lua", true))()
+local CodeManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/MonkeHaxx/main/Tapping-Legends-X/resources/codes.lua", true))()
+local ImageStorage = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/MonkeHaxx/main/Tapping-Legends-X/resources/pet-images.lua", true))()
+
+local EggModule = require(game:GetService("ReplicatedStorage").Modules.Tables.Eggs)
+
+--// Variables
 local PetInventory = game:GetService("ReplicatedStorage").Stats[client.Name].Pets
 local PetAssets = game:GetService("ReplicatedStorage").Pets
+local PlayerChat = client.PlayerGui.Chat.Frame.ChatChannelParentFrame["Frame_MessageLogDisplay"].Scroller
 
---// Time Libraries \\--
-local beginTick = tick()
-local osDate = os.date('!*t', os.time())
-
---// Webhook Setups \\--
-local AssetId
-local RobloxAssetId
-local PetIconLink
-
---// Function Setups \\--
-local round = function(value, decimals)
-    return tonumber(string.format("%." .. (decimals) .. "f", value))
-end
-local comma = function(value)
-    value = tostring(value)
-    return value:reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
-end
+--// Function Handlers
 local getImage = function(assetId)
     local api = request({
             Url = "https://thumbnails.roblox.com/v1/assets?assetIds=" .. assetId .. "&size=150x150&format=Png",
@@ -49,13 +38,16 @@ local getImage = function(assetId)
     local dataString = string.split(api.Body, '"')
     return dataString[12]
 end
+local redeemCode = function(code)
+    return game:GetService("ReplicatedStorage").Remotes.RedeemCode:InvokeServer(code)
+end
 
---// Hatched Pet UID \\--
+--// Unique Pet Identifier 
 PetInventory.ChildAdded:Connect(function(instance)
     getgenv().PetUID = instance.Name
 end)
 
---// Detect Hatch Message
+--// Detect Pet Hatch & Send Webhook
 PlayerChat.ChildAdded:Connect(function(message)
     if string.find(message.TextLabel.Text, client.Name.." hatched a") then
 
@@ -63,6 +55,21 @@ PlayerChat.ChildAdded:Connect(function(message)
         local HatchedPetName = PetInventory[getgenv().PetUID].PetName.Value
         local HatchedPetPower = PetInventory[getgenv().PetUID].Power.Value
         local HatchedPetTier = PetInventory[getgenv().PetUID].Tier.Value
+
+        --// Get Egg Name
+        for _, v in pairs(game:GetService("Workspace").Eggs:GetChildren()) do
+            if client:DistanceFromCharacter(v.E.Position) < 15 then
+                getgenv().EggName = tostring(v)
+            end
+        end
+
+        --// get Pet Chance
+        for i, table in pairs(EggModule[getgenv().EggName].Pets) do
+            if table.PetName == HatchedPetName then
+                getgenv().ChanceShort = "1 in "..FormatManager:suffix(100/table.Chance)
+                getgenv().ChanceLong = "1 in "..FormatManager:comma(100/table.Chance)
+            end
+        end
 
         --// Get Roblox Asset ID Of Hatched Pet
         local Pet = PetAssets[HatchedPetName]
@@ -108,8 +115,13 @@ PlayerChat.ChildAdded:Connect(function(message)
                 ["color"] =  tonumber(RarityColor),
                 ["fields"] = {{
                     ["name"] = "🔢 Pet Stats:",
-                    ["value"] = comma(HatchedPetPower),
+                    ["value"] = FormatManager:comma(HatchedPetPower),
                     ["inline"] = true
+                },
+                {
+                    ["name"] = "🍀 Chance:",
+                    ["value"] = getgenv().ChanceShort,
+                    ["inline"] = false
                 },
                 {
                     ["name"] = "📦 Inventory Space:",
@@ -117,23 +129,30 @@ PlayerChat.ChildAdded:Connect(function(message)
                     ["inline"] = false
                 }
                 },
-                ["footer"] = {["text"] = '🥚 '..comma(client.leaderstats.Eggs.Value)},
+                ["footer"] = {["text"] = '🥚 '..FormatManager:comma(client.leaderstats.Eggs.Value)},
                 ["timestamp"] = DateTime.now():ToIsoDate()
             }}
         }
 
         request({Url= getgenv().NotificationWebhook, Body = game:GetService("HttpService"):JSONEncode(WebhookData), Method = "POST", Headers = {["content-type"] = "application/json"}})
+        print("sent")
     end
 end)
 
---// Credits & Anti AFK
-warn("[!] Tapping Legends X Hatch Notifications Loaded!")
-warn("[!] Script took", round((tick() - beginTick)*10^3, 0), "ms to load.\n")
-warn("[?] Script Version: v"..version)
-warn("[?] Provided & Made by: CollateralDamage\n")
-print("[*] Anti AFK is Enabled\n__________________________________________________________")
+spawn(function()
+    warn("[!] Tapping Legends X Hatch Notifications Loaded!")
+    warn("[!] Script took", FormatManager:round((tick() - beginTick)*10^3, 0), "ms to load.\n")
+    warn("[?] Script Version: v"..Notificationversion)
+    warn("[?] Provided & Made by: CollateralDamage\n")
+    print("[*] Anti AFK is Enabled\n__________________________________________________________")
 
-Notification.new("success", "Script Loaded!", "Tapping Legends X Hatch Notifications Loaded!", true, 5)
-Notification.new("message", "Script took "..round((tick() - beginTick)*10^3, 0).." ms to load.", "Provided & Made by: CollateralDamage", true, 6)
+    NotificationManager.new("success", "Script Loaded!", "Tapping Legends X Hatch Notifications Loaded!", true, 5)
+    NotificationManager.new("message", "Script took "..FormatManager:round((tick() - beginTick)*10^3, 0).." ms to load.", "Provided & Made by: CollateralDamage", true, 6)
+
+    for _, v in pairs(CodeManager) do
+        redeemCode(v)
+        task.wait(0.5)
+    end
+end)
 
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do v:Disable() end
