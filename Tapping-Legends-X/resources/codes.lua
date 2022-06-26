@@ -29,4 +29,12 @@ return {
     "15m",
     "sussydata",
     "missingluck",
+    "50ksuscode",
+    "hell",
+    "25m",
+    "60kthanks",
+    "tech",
+    "sorryfix",
+    "70kepic",
+    "steampunk"
 }
