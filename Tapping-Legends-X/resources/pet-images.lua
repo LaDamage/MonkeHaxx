@@ -19,7 +19,22 @@ return {
     ["Celestial Lion"] = "https://cdn.discordapp.com/attachments/975685218411372585/977655526521438228/Celestial_Lion.png",
     ["Divine Bull"] = "https://cdn.discordapp.com/attachments/975685218411372585/977617963005931621/Divine_Bull.png",
     ["Opranhim Trio"] = "https://cdn.discordapp.com/attachments/975685218411372585/977618016818827274/Opranhim_Trio.png",
-
+    
+    --// Hell Egg
+    ["Hell Genesic"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628589076615189/Hell_Genesic.png",
+    ["Cursed Hell Eye"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628645741686824/Cursed_hell_Eye.png",
+    ["Enchanted Inferno"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628691862249502/Enchanted_Inferno.png",
+    
+    --// Tech Egg
+    ["Vibrant Tech"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628722379980930/Vibrant_Tech.png",
+    ["Shock Tech Hydra"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628749156450344/Shock_tech_Hydra.png",
+    ["Futuristic Mech"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628779468681257/Futuristic_Mech.png",
+    
+    --// Steampunk Egg
+    ["Steamy Engineer"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628809944498216/Steamy_Engineer.png",
+    ["Steampunk Fish"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628842521653339/Steampunk_Fish.png",
+    ["Mechanical Time"] = "https://cdn.discordapp.com/attachments/975685218411372585/990628874805182494/Mechanical_Time.png",
+    
     --// 1M Egg
     ["1M Easter Trophy"] = "https://cdn.discordapp.com/attachments/975685218411372585/975698520562606100/1M_Easter_Trophy.png",
 
