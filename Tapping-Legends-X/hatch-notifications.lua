@@ -1,6 +1,3 @@
-getgenv().SecretNotification = "<@&role_id>"
-getgenv().NotificationWebhook = "https://discord.com/api/webhooks/"
-
 --// Execution Check
 if tlx_LOADED then warn("[!] Tapping Legends X Hatch Notifications Already Loaded!") return end
 pcall(function() getgenv().tlx_LOADED = true end)
