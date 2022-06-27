@@ -15,7 +15,7 @@ end
 
 --// Resource Managers
 getgenv().DataStorage = {
-    Version = "4.1.5",
+    Version = "4.2.0",
     Discord = getgenv().SecretNotification
 }
 
@@ -69,7 +69,7 @@ PlayerChat.ChildAdded:Connect(function(message)
         --// get Pet Chance
         for i, table in pairs(EggModule[getgenv().EggName].Pets) do
             if table.PetName == HatchedPetName then
-                getgenv().ChanceShort = "1 in "..FormatManager:suffix(100/table.Chance)
+                --getgenv().ChanceShort = "1 in "..FormatManager:suffix(100/table.Chance)
                 getgenv().ChanceLong = FormatManager:comma(FormatManager:round(100/table.Chance/game:GetService("ReplicatedStorage").Stats[client.Name].PlayerData.TotalLuckMultiplier.Value, 0))
             end
         end
@@ -83,7 +83,7 @@ PlayerChat.ChildAdded:Connect(function(message)
             PetIconLink = getImage(require(Pet.Settings).iconGold:gsub("rbxassetid%:%/%/", ""))
 
         elseif HatchedPetTier == 3 then
-            for _, v in pairs(PetImages) do
+            for _, v in pairs(ImageStorage) do
                 if _ == HatchedPetName then
                     PetIconLink = v
                 end
