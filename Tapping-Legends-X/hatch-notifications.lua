@@ -1,3 +1,6 @@
+getgenv().SecretNotification = "<@&role_id>"
+getgenv().NotificationWebhook = "https://discord.com/api/webhooks/"
+
 --// Execution Check
 if tlx_LOADED then warn("[!] Tapping Legends X Hatch Notifications Already Loaded!") return end
 pcall(function() getgenv().tlx_LOADED = true end)
@@ -14,7 +17,10 @@ if type(syn) == 'table' and type(syn.request) == 'function' then
 end
 
 --// Resource Managers
-getgenv().Notificationversion = "4.0.0"
+getgenv().DataStorage = {
+    Version = "4.1.0",
+    Discord = getgenv().SecretNotification
+}
 
 local FormatManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/Functions/main/numbers.lua", true))()
 local NotificationManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/LaDamage/Notifications/main/Notification-Library.lua", true))()
@@ -67,7 +73,7 @@ PlayerChat.ChildAdded:Connect(function(message)
         for i, table in pairs(EggModule[getgenv().EggName].Pets) do
             if table.PetName == HatchedPetName then
                 getgenv().ChanceShort = "1 in "..FormatManager:suffix(100/table.Chance)
-                getgenv().ChanceLong = "1 in "..FormatManager:comma(100/table.Chance)
+                getgenv().ChanceLong = FormatManager:comma(FormatManager:round(100/table.Chance/game:GetService("ReplicatedStorage").Stats[client.Name].PlayerData.TotalLuckMultiplier.Value, 0))
             end
         end
 
@@ -108,7 +114,7 @@ PlayerChat.ChildAdded:Connect(function(message)
 
         --// Create Webhook Data
         local WebhookData = {
-            ["content"] = getgenv().SecretNotification,
+            ["content"] = DataStorage.Discord,
             ["embeds"] = {{
                 ["title"] = message.TextLabel.Text,
                 ["thumbnail"] = {["url"] = PetIconLink},
@@ -120,7 +126,7 @@ PlayerChat.ChildAdded:Connect(function(message)
                 },
                 {
                     ["name"] = "🍀 Chance:",
-                    ["value"] = getgenv().ChanceShort,
+                    ["value"] = "1 in "..ChanceLong,
                     ["inline"] = false
                 },
                 {
@@ -135,14 +141,13 @@ PlayerChat.ChildAdded:Connect(function(message)
         }
 
         request({Url= getgenv().NotificationWebhook, Body = game:GetService("HttpService"):JSONEncode(WebhookData), Method = "POST", Headers = {["content-type"] = "application/json"}})
-        print("sent")
     end
 end)
 
 spawn(function()
     warn("[!] Tapping Legends X Hatch Notifications Loaded!")
     warn("[!] Script took", FormatManager:round((tick() - beginTick)*10^3, 0), "ms to load.\n")
-    warn("[?] Script Version: v"..Notificationversion)
+    warn("[?] Script Version: v"..DataStorage.Version)
     warn("[?] Provided & Made by: CollateralDamage\n")
     print("[*] Anti AFK is Enabled\n__________________________________________________________")
 
