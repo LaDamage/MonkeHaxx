@@ -106,12 +106,12 @@ PlayerChat.ChildAdded:Connect(function(message)
             getgenv().SecretNotification = nil
         elseif string.find(message.TextLabel.Text, "Secret") then
             RarityColor = 0x32cd32
-            getgenv().SecretNotification = getgenv().OriginalDiscord
+            getgenv().SecretNotification = DataStorage.Discord
         end
 
         --// Create Webhook Data
         local WebhookData = {
-            ["content"] = DataStorage.Discord,
+            ["content"] = getgenv().SecretNotification,
             ["embeds"] = {{
                 ["title"] = message.TextLabel.Text,
                 ["thumbnail"] = {["url"] = PetIconLink},
