@@ -37,5 +37,7 @@ return {
     "sorryfix",
     "70kepic",
     "steampunk",
-    "4thjuly"
+    "4thjuly",
+    "80knicevials",
+    "swamp"
 }
