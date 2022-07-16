@@ -39,5 +39,6 @@ return {
     "steampunk",
     "4thjuly",
     "80knicevials",
-    "swamp"
+    "swamp",
+    "candy"
 }
