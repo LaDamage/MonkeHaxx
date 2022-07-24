@@ -40,5 +40,6 @@ return {
     "4thjuly",
     "80knicevials",
     "swamp",
-    "candy"
+    "candy",
+    "summer"
 }
