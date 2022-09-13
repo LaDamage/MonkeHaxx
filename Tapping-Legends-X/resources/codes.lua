@@ -41,5 +41,15 @@ return {
     "80knicevials",
     "swamp",
     "candy",
-    "summer"
+    "summer",
+    "90kvialsty",
+    "Magic",
+    "Fantasy",
+    "Toy",
+    "retro",
+    "lab",
+    "100kbigmilestone",
+    "temple",
+    "hundredthousandbigthanks",
+    "farm",
 }
